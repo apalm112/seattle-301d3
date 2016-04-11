@@ -21,6 +21,13 @@ Article.prototype.toHtml = function() {
   // the author name and url, the article title and body, and the
   // publication date.
 
+  $newArticle.attr('data-author', this.author);
+  $newArticle.attr('data-title', this.title);
+  $newArticle.attr('data-authorUrl', this.authorUrl);
+  $newArticle.attr('data-publishedOn', this.publishedOn);
+  $newArticle.attr('data-body', this.body);
+
+
   // Include the publication date as a 'title' attribute to show on hover:
   $newArticle.find('time[pubdate]').attr('title', this.publishedOn)
 
@@ -30,6 +37,7 @@ Article.prototype.toHtml = function() {
   $newArticle.append('<hr>');
 
   // TODO: This cloned article is no longer a template, so we should remove that class...
+//  $newArticle.remove('template')
 
   return $newArticle;
 }
