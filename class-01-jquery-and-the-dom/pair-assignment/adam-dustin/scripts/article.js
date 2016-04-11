@@ -30,14 +30,18 @@ Article.prototype.toHtml = function() {
 
   // Include the publication date as a 'title' attribute to show on hover:
   $newArticle.find('time[pubdate]').attr('title', this.publishedOn)
+  $newArticle.find('section.article-body').html(this.body);
+  $newArticle.find('header h1').text(this.title);
+  $newArticle.find('address a').text(this.author);
+  $newArticle.find('address a').attr('href', this.authorUrl);
 
   // Display the date as a relative number of "days ago":
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago')
 
-  $newArticle.append('<hr>');
+  //$newArticle.append('<hr>');
 
   // TODO: This cloned article is no longer a template, so we should remove that class...
-//  $newArticle.remove('template')
+  $('article').removeClass('template');
 
   return $newArticle;
 }
