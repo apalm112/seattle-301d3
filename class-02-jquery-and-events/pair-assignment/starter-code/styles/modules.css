@@ -23,8 +23,11 @@
 
 #filters {
   padding: 0;
-  width: 100%;
 
+}
+
+select {
+  width: 100%;
 }
 
 #filters select {
