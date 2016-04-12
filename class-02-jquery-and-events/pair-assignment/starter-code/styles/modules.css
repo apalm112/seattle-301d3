@@ -2,6 +2,7 @@
 
 .site-header {
   padding: .1em;
+  background-color: #AA8439;
 }
 
 .main-nav {
@@ -22,6 +23,8 @@
 
 #filters {
   padding: 0;
+  width: 100%;
+
 }
 
 #filters select {
@@ -47,4 +50,8 @@
 
 .pull-right {
   float: right;
+}
+
+ul {
+  list-style: none;
 }
