@@ -11,20 +11,20 @@
     <link rel="stylesheet" href="styles/modules.css">
 
     <!--
-      TODO: Complete this script tag to hold the Handlebars template.
+      DONE: Complete this script tag to hold the Handlebars template.
         - Be sure to give it a meaningful id attribute, and don't forget to specify the type!
         - Insert placeholder keys.
     -->
-    <script id="" type="">
-      <article class="clearfix" data-author="{{}}" data-category="{{}}">
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
         <header>
-          <h1>{{}}</h1>
+          <h1>{{title}}</h1>
           <div class="byline">
-            By <address><a href="{{}}">{{}}</a></address>
-            {{}}
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishStatus}}
           </div>
         </header>
-        <section class="article-body">{{{}}}</section>
+        <section class="article-body">{{{body}}}</section>
         <a href="#" class="read-on">Read on &rarr;</a>
       </article>
     </script>
