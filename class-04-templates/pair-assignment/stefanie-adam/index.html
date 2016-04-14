@@ -28,6 +28,14 @@
         <a href="#" class="read-on">Read on &rarr;</a>
       </article>
     </script>
+
+    <script id="author-filter-template" type="text/x-handlebars-template">
+        <option value="{{author}}">{{author}}</option>
+    </script>
+    <script id="category-filter-template" type="text/x-handlebars-template">
+        <option value="{{category}}">{{category}}</option>
+    </script>
+
   </head>
   <body>
     <header class="site-header clearfix">
@@ -52,13 +60,13 @@
         <div>
           <ul id="filters">
             <li>
-              <select id="author-filter">
+              <select id="author-filter" data-category"#author">
                 <option value="">-- Filter by Authors --</option>
               </select>
             </li>
             <li>
               <select id="category-filter">
-                <option value="">-- Filter by Categories --</option>
+                  <option value="">-- Filter by Categories --</option>
               </select>
             </li>
           </ul>

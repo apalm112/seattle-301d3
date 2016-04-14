@@ -23,9 +23,19 @@ Article.prototype.toHtml = function() {
 
   this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
   this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
-
   // DONE: Use the function that Handlebars gave you to return your filled-in html template for THIS article.
+  return template(this);
+};
 
+Article.prototype.filterAuthorsToHtml = function() {
+  var $source = $('#author-filter-template').html();
+  var template = Handlebars.compile($source);
+  return template(this);
+};
+
+Article.prototype.filterCategoriesToHtml = function() {
+  var $source = $('#category-filter-template').html();
+  var template = Handlebars.compile($source);
   return template(this);
 };
 
@@ -40,3 +50,15 @@ rawData.forEach(function(ele) {
 articles.forEach(function(a){
   $('#articles').append(a.toHtml());
 });
+
+articles.forEach(function(a) {
+  $('#author-filter').append(a.filterAuthorsToHtml());
+  $('#category-filter').append(a.filterCategoriesToHtml());
+});
+
+// articles.forEach(function(a) {
+//   $('#category-filter').append(a.filterToHtml());
+// });
+//
+// $('#author-filter').parent().appendTo('#filters');
+// console.log('target of append: ', $('#author-filter').parent());
