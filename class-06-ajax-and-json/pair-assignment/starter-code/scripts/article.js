@@ -59,8 +59,7 @@ Article.fetchAll = function() {
     // 1. Retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
   $.getJSON('data/hackerIpsum.json', function(data) {
     Article.loadAll(data);
-    articleView.initIndexPage();
-
+    
   });
 
   }
