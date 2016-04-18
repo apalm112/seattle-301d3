@@ -83,7 +83,10 @@
     <script src="/scripts/article.js"></script>
     <script src="/scripts/articleView.js"></script>
     <script>
-      // TODO: What model 'Article' function do we need to call, to initiate the retrieval of data?
+      // DONE: What model 'Article' function do we need to call, to initiate the retrieval of data?
+      // none of the files are encapsulated, need an iife?, Article.loadAll()?
+      Article.fetchAll();
+      articleView.initIndexPage();
     </script>
   </body>
 </html>
