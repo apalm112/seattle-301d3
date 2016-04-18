@@ -38,8 +38,8 @@ Article.loadAll = function(dataPassedIn) {
 
   dataPassedIn.forEach(function(ele) {
     Article.all.push(new Article(ele));
-  })
-}
+  });
+};
 
 // This function below will retrieve the data from either a local or remote source,
 // and process it, then hand off control to the View.
@@ -49,27 +49,28 @@ Article.fetchAll = function() {
     // we can load it by calling the .loadAll() method,
     // and then render the index page (using the proper method on the articleView object).
     Article.loadAll(JSON.parse(localStorage.hackerIpsum));
-      //TODO: What do we pass in here to the .loadAll() method? Be careful
-      // when handling different data types between here and localStorage!
-      //pull the info, then parse it.
+    //TODO: What do we pass in here to the .loadAll() method? Be careful
+    // when handling different data types between here and localStorage!
+    //pull the info, then parse it.
     articleView.initIndexPage(); //TODO: Change this fake method call to the correct
     // one that will render the index page.
   } else {
     // TODO: When we don't already have our data, we need to:
     // 1. Retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
-  $.getJSON('data/hackerIpsum.json', function(data) {
-    Article.loadAll(data);
-    
-  });
+    $.getJSON('data/hackerIpsum.json', function(data) {
+      Article.loadAll(data);
+      console.log(data);
+      localStorage.hackerIpsum = JSON.stringify(data);
+      articleView.initIndexPage();
+    });
 
-  }
     // 2. Store the resulting JSON data with the .loadAll method,
+  }
 
     // 3. Cache it in localStorage so we can skip the server call next time,
 
     // 4. And then render the index page (perhaps with an articleView method?).
-
-  }
+};
 
 
 /* Great work so far! STRETCH GOAL TIME! Cache the eTag located in Headers, to see if it's updated!
