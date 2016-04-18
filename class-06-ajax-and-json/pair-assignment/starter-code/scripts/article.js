@@ -41,33 +41,8 @@ Article.loadAll = function(dataPassedIn) {
   });
 };
 
-// This function below will retrieve the data from either a local or remote source,
-// and process it, then hand off control to the View.
-Article.fetchAll = function() {
-  if (localStorage.hackerIpsum) {
-    // When our data is already in localStorage,
-    // we can load it by calling the .loadAll() method,
-    // and then render the index page (using the proper method on the articleView object).
-    Article.loadAll(JSON.parse(localStorage.hackerIpsum));
-    //DONE: What do we pass in here to the .loadAll() method? Be careful
-    // when handling different data types between here and localStorage!
-    //pull the info, then parse it.
-    articleView.initIndexPage();
-    //DONE: Change this fake method call to the correct
-    // one that will render the index page.
-  } else {
-    // DONE: When we don't already have our data, we need to:
-    // 1. Retrieve the JSON file from the server with AJAX, etc.
-    $.getJSON('data/hackerIpsum.json', function(data) {
-      Article.loadAll(data);
-      console.log(data);
-      localStorage.hackerIpsum = JSON.stringify(data);
-      articleView.initIndexPage();
-    });
-  }
-};
 
-
+// DONE:
 /* Great work so far! STRETCH GOAL TIME! Cache the eTag located in Headers, to see if it's updated!
   Article.fetchAll = function() {
     if (localStorage.hackerIpsum) {
@@ -76,3 +51,27 @@ Article.fetchAll = function() {
   } else {}
 }
 */
+Article.fetchAll = function() {
+  $.ajax({
+    type: 'GET',
+    url: 'data/hackerIpsum.json',
+    success: function(data, message, weasel) {
+      var eTag = weasel.getResponseHeader('eTag');
+      if (eTag === localStorage.eTag) {
+        Article.loadAll(JSON.parse(localStorage.hackerIpsum));
+        articleView.initIndexPage();
+        console.log('Local storage data is still current; load from local storage!');
+      } else {
+        $.getJSON('data/hackerIpsum.json', function(data) {
+          Article.loadAll(data);
+          console.log(data);
+          localStorage.hackerIpsum = JSON.stringify(data);
+          localStorage.eTag = eTag;
+          articleView.initIndexPage();
+          console.log('Nothing in local storage; load for the first time!');
+        });
+      }
+      console.log(eTag);
+    }
+  });
+};
