@@ -2,8 +2,9 @@
   var aboutController = {};
 
   aboutController.index = function() {
-    // TODO: Define a function that hides all main section elements, and then reveals just the #about section:
-    $('').hide().show();
+    // DONE: Define a function that hides all main section elements, and then reveals just the #about section:
+    $('main > section').hide();
+    $('#about').show();
 
   };
 
